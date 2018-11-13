@@ -112,12 +112,14 @@ void displayFunc(const char *filepath, int client_fd){
                 struct dirent* underlying_file = NULL;
 
                 while((underlying_file = readdir(path)) != NULL){
-
-                        strcat(underlying_file->d_name, "/");
-                        snprintf(bodyIndex, 4096, index_body, underlying_file->d_name, underlying_file->d_name);
-                        strcat(bodyIndex, "\n");
-                        // send body
-	                send(client_fd, bodyIndex, strlen(bodyIndex), 0);        
+                        if(strcmp(underlying_file->d_name, ".") != 0 && strcmp(underlying_file->d_name, "..") != 0)
+                        {
+                                strcat(underlying_file->d_name, "/");
+                                snprintf(bodyIndex, 4096, index_body, underlying_file->d_name, underlying_file->d_name);
+                                strcat(bodyIndex, "\n");
+                                // send body
+	                        send(client_fd, bodyIndex, strlen(bodyIndex), 0);
+                        }
                 }
         // send footer
 	send(client_fd, index_ftr, strlen(index_ftr), 0);
