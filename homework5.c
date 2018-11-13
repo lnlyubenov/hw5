@@ -27,6 +27,9 @@ char * request_text = "HTTP/1.0 200 OK\r\n"
 
 char * request_jpeg = "HTTP/1.0 200 OK\r\n"
                      "Context-type: image/jpeg; charset=UTF-8\r\n\r\n";
+                     
+char * request_jpg = "HTTP/1.0 200 OK\r\n"
+                     "Context-type: image/jpg; charset=UTF-8\r\n\r\n";
 
 char * request_gif = "HTTP/1.0 200 OK\r\n"
                      "Context-type: image/gif; charset=UTF-8\r\n\r\n";
@@ -211,7 +214,7 @@ void serve_request(int client_fd){
                 else if(strstr(filename, ".jpg") != NULL)
                         file = request_jpg;
                 else if(strstr(filename, ".jpeg") != NULL)
-                        file = request_jpg;
+                        file = request_jpeg;
                 else if(strstr(filename, ".gif") != NULL)
                         file = request_gif;
                 else if(strstr(filename, ".png") != NULL)
