@@ -214,12 +214,8 @@ void serve_request(int client_fd){
                 else if(strstr(filename, ".ico"))
                         file = request_ico;
                 else    
-                        file =  NULL;
-                
-                if(file == NULL){
-                        return;
-                }
-
+                        file =  request_text;
+        
         	send(client_fd,file,strlen(file),0);
                 read_fd = open(filename,0,0);
                 while(1) {
