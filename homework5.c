@@ -103,7 +103,7 @@ void displayFunc(const char *filepath, int client_fd){
         snprintf(headerIndex, 4096, index_hdr, filepath, filepath);
 	
         //send request and header
-	//send(client_fd, request_str, strlen(request_str), 0);
+	send(client_fd, request_str, strlen(request_str), 0);
         send(client_fd, headerIndex, strlen(headerIndex), 0);
 
         // check to see if opening up directory was successful
@@ -115,6 +115,7 @@ void displayFunc(const char *filepath, int client_fd){
                         if(strcmp(underlying_file->d_name, ".") != 0 && strcmp(underlying_file->d_name, "..") != 0)
                         {
                                 strcat(underlying_file->d_name, "/");
+                                memset(bodyIndex, 0, 4096);
                                 snprintf(bodyIndex, 4096, index_body, underlying_file->d_name, underlying_file->d_name);
                                 strcat(bodyIndex, "\n");
                                 // send body
