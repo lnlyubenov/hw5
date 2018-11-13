@@ -103,7 +103,7 @@ void displayFunc(const char *filepath, int client_fd){
         snprintf(headerIndex, 4096, index_hdr, filepath, filepath);
 	
         //send request and header
-	send(client_fd, request_str, strlen(request_str), 0);
+	//send(client_fd, request_str, strlen(request_str), 0);
         send(client_fd, headerIndex, strlen(headerIndex), 0);
 
         // check to see if opening up directory was successful
@@ -149,8 +149,9 @@ int fileOrDir(const char *path, int number){
         else if(number == 2){
                 stat(path, &stat_path);
                 return S_ISDIR(stat_path.st_mode);
-        }else{
-                return -999;
+        }
+        else{
+                return -1;
         }
 }
 
