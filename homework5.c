@@ -25,7 +25,7 @@ char * request_str = "HTTP/1.0 200 OK\r\n"
 char * request_text = "HTTP/1.0 200 OK\r\n"
                      "Content-type: text/plain; charset=UTF-8\r\n\r\n";
 
-char * request_jpg = "HTTP/1.0 200 OK\r\n"
+char * request_jpeg = "HTTP/1.0 200 OK\r\n"
                      "Context-type: image/jpeg; charset=UTF-8\r\n\r\n";
 
 char * request_gif = "HTTP/1.0 200 OK\r\n"
@@ -225,7 +225,7 @@ void serve_request(int client_fd){
                 
                 if(file != NULL){
                         send(client_fd,file,strlen(file),0);
-                        read_fd = open(file,0,0);
+                        read_fd = open(filename,0,0);
                         while(1) {
                                 bytes_read = read(read_fd,send_buf,4096);
                                 if(bytes_read == 0)
