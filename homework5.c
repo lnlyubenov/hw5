@@ -52,23 +52,23 @@ char * index_body = "<li><a href=\"%s\">%s</a>";
 
 char * index_ftr = "</ul><hr></body></html>";
 
-		char *error =   "<!DOCTYPE html>"
-			        "<html lang=\"en\">"
-                                "<head>"
-	                        "<meta charset=\"utf-8\">"
-	                        "<title>404 HTML Template by Colorlib</title>"
-                                "</head>"
-                                "<body>"
-	                        "<div id=\"notfound\">"
-		                "<div class=\"notfound\">"
-			        "<div class=\"notfound-404\">"
-				"<h1>404 ERROR</h1>"
-			        "</div>"
-			        "<h2>Oops! This Page Could Not Be Found</h2>"
-			        "<p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>"
-		                "</div>"
-	                        "</div>"
-                                "</html>";
+char *error =   "<!DOCTYPE html>"
+		"<html lang=\"en\">"
+                "<head>"
+	        "<meta charset=\"utf-8\">"
+	        "<title>404 HTML Template by Colorlib</title>"
+                "</head>"
+                "<body>"
+	        "<div id=\"notfound\">"
+		"<div class=\"notfound\">"
+		"<div class=\"notfound-404\">"
+		"<h1>404 ERROR</h1>"
+		"</div>"
+		"<h2>Oops! This Page Could Not Be Found</h2>"
+		"<p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>"
+		"</div>"
+	        "</div>"
+                "</html>";
 
 /* char* parseRequest(char* request)
  * Args: HTTP request of the form "GET /path/to/resource HTTP/1.X"
@@ -199,24 +199,24 @@ void serve_request(int client_fd){
         else if(fileOrDir(filename, 1)){
         
                 char * file;
-                if(strstr(filename, ".html"))
+                if(strstr(filename, ".html") != NULL)
                         file = request_str;
-                else if(strstr(filename, ".txt"))
+                else if(strstr(filename, ".txt") != NULL)
                         file = request_text;
-                else if(strstr(filename, ".jpg"))
+                else if(strstr(filename, ".jpg") != NULL)
                         file = request_jpeg;
-                else if(strstr(filename, ".jpeg"))
+                else if(strstr(filename, ".jpeg") != NULL)
                         file = request_jpeg;
-                else if(strstr(filename, ".gif"))
+                else if(strstr(filename, ".gif") != NULL)
                         file = request_gif;
-                else if(strstr(filename, ".png"))
+                else if(strstr(filename, ".png") != NULL)
                         file = request_png;
-                else if(strstr(filename, ".pdf"))
+                else if(strstr(filename, ".pdf") != NULL)
                         file = request_pdf;
-                else if(strstr(filename, ".ico"))
+                else if(strstr(filename, ".ico") != NULL)
                         file = request_ico;
                 else    
-                        file =  request_text;
+                        file =  NULL;
         
         	send(client_fd,file,strlen(file),0);
                 read_fd = open(filename,0,0);
