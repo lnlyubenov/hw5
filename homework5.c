@@ -226,16 +226,14 @@ void serve_request(int client_fd){
                 else    
                         file =  NULL;
                 
-                if(file != NULL){
-                        send(client_fd,file,strlen(file),0);
-                        read_fd = open(filename,0,0);
-                        while(1) {
-                                bytes_read = read(read_fd,send_buf,4096);
-                                if(bytes_read == 0)
-                                        break;
+                send(client_fd,file,strlen(file),0);
+                read_fd = open(filename,0,0);
+                while(1) {
+                        bytes_read = read(read_fd,send_buf,4096);
+                        if(bytes_read == 0)
+                                break;
                         send(client_fd,send_buf,bytes_read,0);
-                        }
-                }
+                }        
         close(read_fd);
         close(client_fd);
         }else{
