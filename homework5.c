@@ -205,6 +205,8 @@ void serve_request(int client_fd){
                         file = request_text;
                 else if(strstr(filename, ".jpg"))
                         file = request_jpeg;
+                else if(strstr(filename, ".jpeg"))
+                        file = request_jpeg;
                 else if(strstr(filename, ".gif"))
                         file = request_gif;
                 else if(strstr(filename, ".png"))
