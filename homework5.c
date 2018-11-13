@@ -65,7 +65,7 @@ char *error =   "<!DOCTYPE html>"
 		"<h1>404 ERROR</h1>"
 		"</div>"
 		"<h2>Oops! This Page Could Not Be Found</h2>"
-		"<p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>"
+		"<p>Sorry but the page you are looking for does not exist, have been removed, name changed or is temporarily unavailable</p>"
 		"</div>"
 	        "</div>"
                 "</html>";
@@ -105,6 +105,7 @@ void displayFunc(const char *filepath, int client_fd){
         //send request and header
 	send(client_fd, request_str, strlen(request_str), 0);
         send(client_fd, headerIndex, strlen(headerIndex), 0);
+        memset(headerIndex, 0, 4096);
 
         // check to see if opening up directory was successful
         if(path != NULL){
@@ -115,11 +116,11 @@ void displayFunc(const char *filepath, int client_fd){
                         if(strcmp(underlying_file->d_name, ".") != 0 && strcmp(underlying_file->d_name, "..") != 0)
                         {
                                 strcat(underlying_file->d_name, "/");
-                                memset(bodyIndex, 0, 4096);
                                 snprintf(bodyIndex, 4096, index_body, underlying_file->d_name, underlying_file->d_name);
                                 strcat(bodyIndex, "\n");
                                 // send body
 	                        send(client_fd, bodyIndex, strlen(bodyIndex), 0);
+                                memset(bodyIndex, 0, 4096);
                         }
                 }
         // send footer
