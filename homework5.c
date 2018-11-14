@@ -213,26 +213,24 @@ void serve_request(int client_fd){
         //check if filename is file
         else if(fileOrDir(filename, 1)){
         
-                char * file;
-                if(strstr(filename, ".html") != NULL)
+                char * file = (char*) malloc(sizeof(char)*4096);
+                if(strstr(filename, ".html"))
                         file = request_str;
-                else if(strstr(filename, ".txt") != NULL)
-                        file = request_text;
-                else if(strstr(filename, ".jpg") != NULL)
-                        file = request_jpg;
-                else if(strstr(filename, ".jpeg") != NULL)
-                        file = request_jpeg;
-                else if(strstr(filename, ".gif") != NULL)
-                        file = request_gif;
-                else if(strstr(filename, ".png") != NULL)
-                        file = request_png;
-                else if(strstr(filename, ".pdf") != NULL)
-                        file = request_pdf;
-                else if(strstr(filename, ".ico") != NULL)
-                        file = request_ico;
-                else    
-                        file =  NULL;
-                
+                else if(strstr(filename, ".txt"))
+                        strncpy(file, request_text, 4096);
+                else if(strstr(filename, ".jpg"))
+                        strncpy(file, request_jpg, 4096);
+                else if(strstr(filename, ".jpeg"))
+                        strncpy(file, request_jpg, 4096);
+                else if(strstr(filename, ".gif"))
+                        strncpy(file, request_gif, 4096);
+                else if(strstr(filename, ".png"))
+                        strncpy(file, request_png, 4096);
+                else if(strstr(filename, ".pdf"))
+                        strncpy(file, request_pdf, 4096);
+                else if(strstr(filename, ".ico"))
+                        strncpy(file, request_ico, 4096);
+
                 send(client_fd,file,strlen(file),0);
                 read_fd = open(filename,0,0);
                 while(1) {
