@@ -16,7 +16,6 @@
 
 #define BACKLOG (10)
 
-
 void serve_request(int);
 
 char * request_str = "HTTP/1.0 200 OK\r\n"
@@ -29,7 +28,7 @@ char * request_jpeg = "HTTP/1.0 200 OK\r\n"
                      "Content-type: image/jpeg\r\n\r\n";
                      
 char * request_jpg = "HTTP/1.0 200 OK\r\n"
-                     "Content-type: image/jpg\r\n\r\n";
+                     "Content-type: image/jpeg\r\n\r\n";
 
 char * request_gif = "HTTP/1.0 200 OK\r\n"
                      "Content-type: image/gif\r\n\r\n";
@@ -59,7 +58,6 @@ char *error =   "<!DOCTYPE html>"
 		"<html lang=\"en\">"
                 "<head>"
 	        "<meta charset=\"utf-8\">"
-	        "<title>404 HTML Template by Colorlib</title>"
                 "</head>"
                 "<body>"
 	        "<div id=\"notfound\">"
