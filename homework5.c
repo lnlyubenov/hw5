@@ -96,6 +96,23 @@ void *thread_function(void *argument_value) {
     return NULL;
 }
 
+int fileOrDir(const char *path, int number){
+        struct stat stat_path;    
+
+        if(number == 1){
+                stat(path, &stat_path);
+                return S_ISREG(stat_path.st_mode);
+        }
+        else if(number == 2){
+                stat(path, &stat_path);
+                return S_ISDIR(stat_path.st_mode);
+        }
+        else{
+                return -1;
+        }
+}
+
+
 // function that creates dirs bases on header, body and footer
 void displayFunc(const char *filepath, int client_fd){
         char* headerIndex = (char*) malloc(sizeof(char)*4096);
@@ -118,7 +135,13 @@ void displayFunc(const char *filepath, int client_fd){
                 while((underlying_file = readdir(path)) != NULL){
                         if(strcmp(underlying_file->d_name, ".") != 0 && strcmp(underlying_file->d_name, "..") != 0)
                         {
-                                strcat(underlying_file->d_name, "/");
+                                char *temp = (char*) malloc(sizeof(char)*4096); 
+                                strncpy(temp, filepath, 4096);
+                                strcat(temp, underlying_file->d_name);
+
+                                if(fileOrDir(temp, 2)){
+                                        strcat(underlying_file->d_name, "/");
+                                }
                                 snprintf(bodyIndex, 4096, index_body, underlying_file->d_name, underlying_file->d_name);
                                 strcat(bodyIndex, "\n");
                                 // send body
@@ -142,22 +165,6 @@ char* parseRequest(char* request) {
 
         sscanf(request, "GET %s HTTP/1.", buffer);
         return buffer;
-}
-
-int fileOrDir(const char *path, int number){
-        struct stat stat_path;    
-
-        if(number == 1){
-                stat(path, &stat_path);
-                return S_ISREG(stat_path.st_mode);
-        }
-        else if(number == 2){
-                stat(path, &stat_path);
-                return S_ISDIR(stat_path.st_mode);
-        }
-        else{
-                return -1;
-        }
 }
 
 void serve_request(int client_fd){
