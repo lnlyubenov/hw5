@@ -139,7 +139,7 @@ void displayFunc(const char *filepath, int client_fd){
                                 strncpy(temp, filepath, 4096);
                                 strcat(temp, underlying_file->d_name);
 
-                                if(fileOrDir(temp, 2)){
+                                if(fileOrDir(temp, 2) != 0){
                                         strcat(underlying_file->d_name, "/");
                                 }
                                 snprintf(bodyIndex, 4096, index_body, underlying_file->d_name, underlying_file->d_name);
@@ -190,11 +190,11 @@ void serve_request(int client_fd){
         strncpy(&filename[1],requested_file, 4095);
 
         //if filename is dir
-        if(fileOrDir(filename, 2)){
+        if(fileOrDir(filename, 2) != 0){
                 strcpy(concatedFilename, filename);
                 strcat(concatedFilename, "/index.html");
 
-                if(fileOrDir(concatedFilename, 1)){
+                if(fileOrDir(concatedFilename, 1) != 0){
                         read_fd = open(concatedFilename,0,0);
 
                         while(1){
@@ -211,7 +211,7 @@ void serve_request(int client_fd){
         close(client_fd);
         }
         //check if filename is file
-        else if(fileOrDir(filename, 1)){
+        else if(fileOrDir(filename, 1) != 0){
         
                 char * file = (char*) malloc(sizeof(char)*4096);
                 if(strstr(filename, ".html"))
