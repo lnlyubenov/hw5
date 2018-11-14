@@ -26,25 +26,25 @@ char * request_text = "HTTP/1.0 200 OK\r\n"
                      "Content-type: text/plain; charset=UTF-8\r\n\r\n";
 
 char * request_jpeg = "HTTP/1.0 200 OK\r\n"
-                     "Context-type: image/jpeg; charset=UTF-8\r\n\r\n";
+                     "Content-type: image/jpeg\r\n\r\n";
                      
 char * request_jpg = "HTTP/1.0 200 OK\r\n"
-                     "Context-type: image/jpg; charset=UTF-8\r\n\r\n";
+                     "Content-type: image/jpg\r\n\r\n";
 
 char * request_gif = "HTTP/1.0 200 OK\r\n"
-                     "Context-type: image/gif; charset=UTF-8\r\n\r\n";
+                     "Content-type: image/gif\r\n\r\n";
 
 char * request_png = "HTTP/1.0 200 OK\r\n"
-                     "Context-type: image/png; charset=UTF-8\r\n\r\n";
+                     "Content-type: image/png\r\n\r\n";
 
 char * request_pdf = "HTTP/1.0 200 OK\r\n"
-                     "Context-type: application/pdf; charset=UTF-8\r\n\r\n";
+                     "Content-type: application/pdf; charset=UTF-8\r\n\r\n";
 
 char * request_ico = "HTTP/1.0 200 OK\r\n"
-                     "Context-type: image/x-icon; charset=UTF-8\r\n\r\n";
+                     "Content-type: image/x-icon\r\n\r\n";
 
 char * request_error404 = "HTTP/1.0 404 BAD\r\n"
-		     "Context-type: text/html; charset=UTF-8\r\n\r\n";
+		     "Content-type: text/html; charset=UTF-8\r\n\r\n";
 
 char * index_hdr = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\"><html>"
                    "<title>Directory listing for %s</title>"
